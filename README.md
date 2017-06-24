@@ -31,4 +31,4 @@
     <b>/revive *id*</b> : Will revive the player ID at their current location. Player must be dead.
 
   <h3>Toggle Command:</h3>
-    <b>/toggleDeath<b> : Upon dying you will automatically respawn at a random hospital after 3 seconds.
+    <b>/toggleDeath</b> : Upon dying you will automatically respawn at a random hospital after 3 seconds.
