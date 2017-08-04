@@ -5,7 +5,7 @@
 <ol>
   <li>Drag the RPDeath folder into your server's resource folder. ex (cfx-server/resources)</li>
   <li>Edit the citmp-server.yml file located in the main folder. ex (cfx-server/)</li>
-  <li>Add the following code: `start RPDeath` under the other similar options. Example below.<br/>
+  <li>Add the following code: <b>start RPDeath</b> under the other similar options. Example below.<br/>
 	start mapmanager<br/>
 	start chat<br/>
 	start spawnmanager<br/>
