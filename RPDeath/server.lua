@@ -13,7 +13,7 @@ end)
 AddEventHandler('chatMessage', function(from,name,message)
 	if(message:sub(1,1) == "/") then
 
-		local args = splitString(message, " ")
+		local args = stringsplit(message, " ")
 		local cmd = args[1]
 
 
@@ -49,12 +49,15 @@ AddEventHandler('chatMessage', function(from,name,message)
 end)
 
 
-function splitString(self, delimiter)
-	local words = self:Split(delimiter)
-	local output = {}
-	for i = 0, #words - 1 do
-		table.insert(output, words[i])
-	end
-
-	return output
+-- String splits by the separator.
+function stringsplit(inputstr, sep)
+    if sep == nil then
+            sep = "%s"
+    end
+    local t={} ; i=1
+    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+            t[i] = str
+            i = i + 1
+    end
+    return t
 end
