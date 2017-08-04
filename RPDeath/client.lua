@@ -17,9 +17,6 @@ local allowRevive = false
 local RPDeathEnabled = true
 
 
-TriggerServerEvent('RPD:addPlayer')
-
-
 AddEventHandler('RPD:allowRespawn', function(from)
 	TriggerEvent('chatMessage', "RPDeath", {200,0,0}, "Respawned")
 	allowRespawn = true
