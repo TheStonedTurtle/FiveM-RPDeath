@@ -5,21 +5,19 @@
 <ol>
   <li>Drag the RPDeath folder into your server's resource folder. ex (cfx-server/resources)</li>
   <li>Edit the citmp-server.yml file located in the main folder. ex (cfx-server/)</li>
-  <li>Add the following code: `- RPDeath` under the `AutoStartResources` option. Example below.<br/>
-   AutoStartResources:<br/>
-    - chat<br/>
-    - spawnmanager<br/>
-    - fivem-map-skater<br/>
-    - baseevents<br/>
-    - rconlog<br/>
-    - hardcap # prevents too many players from joining<br/>
-    - scoreboard<br/>
-    - RPDeath</li>
+  <li>Add the following code: `start RPDeath` under the other similar options. Example below.<br/>
+	start mapmanager<br/>
+	start chat<br/>
+	start spawnmanager<br/>
+	start hardcap<br/>
+	start rconlog<br/>
+	start fivem-map-skater<br/>
+  start RPDeath</li>
   <li>All done, restart your server and the mod should automatically start.</li>
 </ol>
 
 <h2>Requires:</h2>
-  <b>- spawnmanager</b>
+  <b>start spawnmanager</b>
 
 <h2>Usage Commands:</h2>
 
