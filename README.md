@@ -3,8 +3,8 @@
 
 <h2>Installation instructions: </h2>
 <ol>
-  <li>Drag the RPDeath folder into your server's resource folder. ex (cfx-server/resources)</li>
-  <li>Edit the citmp-server.yml file located in the main folder. ex (cfx-server/)</li>
+  <li>Drag the RPDeath folder into your server's resource folder. ex (fx-server/resources)</li>
+  <li>Edit your server.cfg file located in the main folder. ex (fx-server/)</li>
   <li>Add the following code: <b>start RPDeath</b> under the other similar options. Example below.<br/>
 	start mapmanager<br/>
 	start chat<br/>
