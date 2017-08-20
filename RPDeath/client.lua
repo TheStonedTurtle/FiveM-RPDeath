@@ -6,6 +6,7 @@ RegisterNetEvent('RPD:toggleDeath')
 -- Turn off automatic respawn here instead of updating FiveM file.
 AddEventHandler('onClientMapStart', function()
 	Citizen.Trace("RPDeath: Disabling autospawn...")
+	exports.spawnmanager:spawnPlayer() -- Ensure player spawns into server.
 	Citizen.Wait(2500)
 	exports.spawnmanager:setAutoSpawn(false)
 	Citizen.Trace("RPDeath: Autospawn disabled!")
