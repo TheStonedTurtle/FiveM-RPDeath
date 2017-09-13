@@ -46,7 +46,7 @@ AddEventHandler('RPD:allowRevive', function(from)
 				message = minutes.." minutes "
 			end
 			message = message..seconds.." seconds"
-			TriggerEvent('chatMessage', "RPDeath", {200,0,0}, "You must wait 5 minutes before reviving yourself, you have "..message.." remaining.")
+			TriggerEvent('chatMessage', "RPDeath", {200,0,0}, "You must wait before reviving yourself, you have ^5"..message.."^0 remaining.")
 			return		
 		end
 	end
