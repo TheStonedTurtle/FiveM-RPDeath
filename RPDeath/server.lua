@@ -21,16 +21,16 @@ AddEventHandler('chatMessage', function(from,name,message)
 			if (args[2] ~= nil) then
 				local playerID = tonumber(args[2])
 
-				if(playerID == nil or GetPlayerName(playerID) == nil) then
+				if(playerID == nil or playerID == 0 or GetPlayerName(playerID) == nil) then
 					TriggerClientEvent('chatMessage', from, "RPDeath", {200,0,0} , "Invalid PlayerID")
 					return
 				end
 
-				TriggerClientEvent('RPD:allowRevive', playerID)
+				TriggerClientEvent('RPD:allowRevive', playerID, from)
 
 				TriggerClientEvent('chatMessage', from, "RPDeath", {200,0,0} , "Player revived")
 			else
-				TriggerClientEvent('RPD:allowRevive', from)
+				TriggerClientEvent('RPD:allowRevive', from, from)
 			end
 		end
 	end

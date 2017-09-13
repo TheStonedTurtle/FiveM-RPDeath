@@ -1,6 +1,10 @@
 RegisterNetEvent('RPD:allowRespawn')
 RegisterNetEvent('RPD:allowRevive') 
-RegisterNetEvent('RPD:toggleDeath') 
+RegisterNetEvent('RPD:toggleDeath')
+
+local reviveWaitPeriod = 300 -- How many seconds to wait before allowing player to revive themselves
+local RPDeathEnabled = true  -- Is RPDeath enabled by default? (/toggleDeath changes this value.)
+
 
 
 -- Turn off automatic respawn here instead of updating FiveM file.
@@ -15,7 +19,7 @@ end)
 
 local allowRespawn = false
 local allowRevive = false
-local RPDeathEnabled = true
+local diedTime = nil
 
 
 AddEventHandler('RPD:allowRespawn', function(from)
@@ -25,6 +29,29 @@ end)
 
 
 AddEventHandler('RPD:allowRevive', function(from)
+	if(not IsEntityDead(GetPlayerPed(-1)))then
+		-- You are alive, do nothing.
+		return
+	end
+
+	-- Trying to revive themselves?
+	if(GetPlayerServerId(PlayerId()) == from and diedTime ~= nil)then
+		local waitPeriod = diedTime + (reviveWaitPeriod * 1000)
+		if(GetGameTimer() < waitPeriod)then
+			local seconds = math.ceil((waitPeriod - GetGameTimer()) / 1000)
+			local message = ""
+			if(seconds > 60)then
+				local minutes = math.floor((seconds / 60))
+				seconds = math.ceil(seconds-(minutes*60))
+				message = minutes.." minutes "
+			end
+			message = message..seconds.." seconds"
+			TriggerEvent('chatMessage', "RPDeath", {200,0,0}, "You must wait 5 minutes before reviving yourself, you have "..message.." remaining.")
+			return		
+		end
+	end
+
+	-- Revive the player.
 	TriggerEvent('chatMessage', "RPDeath", {200,0,0}, "Revived")
 	allowRevive = true
 end)
@@ -63,7 +90,7 @@ end
 Citizen.CreateThread(function()
 	local respawnCount = 0
 	local spawnPoints = {}
-	local playerIndex = NetworkGetPlayerIndex(-1)
+	local playerIndex = NetworkGetPlayerIndex(-1) or 0
 
 
 	math.randomseed(playerIndex)
@@ -95,6 +122,9 @@ Citizen.CreateThread(function()
 		if (RPDeathEnabled) then
 
 			if (IsEntityDead(ped)) then
+				if(diedTime == nil)then
+					diedTime = GetGameTimer()
+				end
 
 
 				SetPlayerInvincible(ped, true)
@@ -106,20 +136,23 @@ Citizen.CreateThread(function()
 					respawnPed(ped, coords)
 
 			  		allowRespawn = false
+			  		diedTime = nil
 					respawnCount = respawnCount + 1
 					math.randomseed( playerIndex * respawnCount )
 
 				elseif (allowRevive) then
 					revivePed(ped)
 
-					allowRevive = false
+					allowRevive = false	
+		  			diedTime = nil
 					Wait(0)
 				else
 		  			Wait(0)
 				end
 			else
 		  		allowRespawn = false
-		  		allowRevive = false			
+		  		allowRevive = false	
+		  		diedTime = nil		
 				Wait(0)
 			end
 
